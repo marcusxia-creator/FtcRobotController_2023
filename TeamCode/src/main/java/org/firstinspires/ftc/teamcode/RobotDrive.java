@@ -72,11 +72,11 @@ public class RobotDrive {
         telemetry.addLine("-------------------");
         telemetry.addData("leftBackMotorPower", robot.frontRightMotor.getVelocity());
         telemetry.addData("RightFrontMotorPower", robot.backLeftMotor.getVelocity());
-        telemetry.addData("RightBackMotorPower", robot.backRightMotor.getVelocity());;
+        telemetry.addData("RightBackMotorPower", robot.backRightMotor.getVelocity());
         telemetry.addLine("-------------------");
         telemetry.addData("leftOdometryEncoder", robot.leftodometry.getCurrentPosition());
         telemetry.addData("CenterOdometryEncoder", robot.rightodometry.getCurrentPosition());
-        telemetry.addData("rightOdometryEncoder", robot.centerodometry.getCurrentPosition());;
+        telemetry.addData("rightOdometryEncoder", robot.centerodometry.getCurrentPosition());
         telemetry.addLine("-------------------");
         telemetry.addData("EncoderCounts", String.valueOf(getEncoderCounts()[0]),getEncoderCounts()[1],getEncoderCounts()[2]);
         telemetry.addLine("-------------------");
@@ -89,7 +89,7 @@ public class RobotDrive {
     private double getRobotHeading() {
         // Get the robot's heading from IMU
         // double heading = robot.imu().firstAngle;
-        double heading = robot.imu.getRobotYaw(AngleUnit.DEGREES);
+        double heading = robot.imu.getRobotYawPitchRollAngles().getYaw(AngleUnit.DEGREES);
         while (heading > 180.0) {
             heading -= 360.0;
         }
