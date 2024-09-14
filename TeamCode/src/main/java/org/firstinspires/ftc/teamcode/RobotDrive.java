@@ -8,6 +8,7 @@ import com.qualcomm.robotcore.util.ElapsedTime;
 import com.qualcomm.robotcore.util.Range;
 
 import org.firstinspires.ftc.robotcore.external.Telemetry;
+import org.firstinspires.ftc.robotcore.external.navigation.AngleUnit;
 
 public class RobotDrive {
 
@@ -87,7 +88,8 @@ public class RobotDrive {
 
     private double getRobotHeading() {
         // Get the robot's heading from IMU
-        double heading = robot.imu.getAngularOrientation().firstAngle;
+        // double heading = robot.imu().firstAngle;
+        double heading = robot.imu.getRobotYaw(AngleUnit.DEGREES);
         while (heading > 180.0) {
             heading -= 360.0;
         }

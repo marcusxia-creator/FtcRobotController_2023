@@ -4,19 +4,20 @@ package org.firstinspires.ftc.teamcode;
 import com.acmerobotics.dashboard.config.Config;
 import com.arcrobotics.ftclib.hardware.motors.Motor;
 import com.arcrobotics.ftclib.hardware.motors.MotorEx;
-import com.qualcomm.hardware.bosch.BNO055IMU;
+import com.qualcomm.hardware.rev.RevHubOrientationOnRobot;
 import com.qualcomm.robotcore.hardware.HardwareMap;
+import com.arcrobotics.ftclib.hardware.RevIMU;
+import com.qualcomm.robotcore.hardware.IMU;
 
 public class RobotHardware {
     public MotorEx frontLeftMotor;
     public MotorEx backLeftMotor;
     public MotorEx frontRightMotor;
     public MotorEx backRightMotor;
-    public BNO055IMU imu;
+    public IMU imu;
     public MotorEx leftodometry;
     public MotorEx rightodometry;
     public MotorEx centerodometry;
-
     public HardwareMap hardwareMap;
 
 
@@ -55,13 +56,16 @@ public class RobotHardware {
     // Initialize IMU
     public void initIMU() {
         // get imu from hardwareMap
-        imu = hardwareMap.get(BNO055IMU.class, "Adafruit_IMU");
+        imu = hardwareMap.get(IMU.class, "imu");
         // Initialize IMU parameter setup
-        BNO055IMU.Parameters imuParameters = new BNO055IMU.Parameters();
-        imuParameters.angleUnit = BNO055IMU.AngleUnit.DEGREES;
-        imuParameters.accelUnit = BNO055IMU.AccelUnit.METERS_PERSEC_PERSEC;
+        //BHI260IMU.Parameters imuParameters = new BHI260IMU.Parameters();
+        //imuParameters.imuOrientationOnRobot = BHI260IMU.Parameters.DEGREES;
+        //imuParameters.imuOrientationOnRobot = BHI260IMU.Parameters.METERS_PERSEC_PERSEC;
         // initialize IMU
-        imu.initialize(imuParameters);
+        //imu.initialize(imuParameters);
+        imu.initialize(
+                new IMU.Parameters(new RevHubOrientationOnRobot(RevHubOrientationOnRobot.LogoFacingDirection.UP, RevHubOrientationOnRobot.UsbFacingDirection.BACKWARD))
+        );
     }
     // reset odometry encoder
     public void resetDriveEncoders(){
